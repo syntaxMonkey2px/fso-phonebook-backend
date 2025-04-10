@@ -2,7 +2,7 @@ require('dotenv').config()
 console.log('MONGODB_URI:', process.env.MONGODB_URI); // Debugging the URI
 
 const express = require('express')
-const Person = require('models/person')
+const Person = require('./models/person')
 
 const app = express()
 
