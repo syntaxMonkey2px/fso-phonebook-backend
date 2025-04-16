@@ -96,6 +96,19 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
   });
 
+
+// Middleware for handling 404 errors
+// This should be defined after all other routes
+  const unknownEndpoint = (request, response) => {
+    response.status(404).send({ error: 'unknown endpoint' })
+  }
+  
+  app.use(unknownEndpoint)
+
+
+// Middleware for handling errors
+// This should be defined after all other routes and before the server starts listening 
+
 const errorHandler = (error, request, response, next) =>{
     console.error(error.message)
 
@@ -108,13 +121,6 @@ const errorHandler = (error, request, response, next) =>{
     next(error)
 }
 app.use(errorHandler)
-
-
-const unknownEndpoint = (request, response) => {
-    response.status(404).send({ error: 'unknown endpoint' })
-  }
-  
-  app.use(unknownEndpoint)
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () =>{
