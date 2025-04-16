@@ -39,7 +39,7 @@ app.get('/api/persons/:id', (request, response, next)=>{
 app.delete('/api/persons/:id', (request, response, next) => {
     console.log('Attempting to delete id:', request.params.id) // Debug log
 
-    Person.findByIdAndRemove(request.params.id)
+    Person.findByIdAndDelete(request.params.id)
         .then(result => {
             if(result){
                 console.log('had this person removed:', result)
@@ -49,7 +49,7 @@ app.delete('/api/persons/:id', (request, response, next) => {
             }
         })
         .catch(error => {
-                
+
             console.error('we\' got a del error:',error)
             next(error)
         })
