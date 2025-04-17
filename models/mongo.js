@@ -9,7 +9,7 @@ const password = process.argv[2]
 
 const url = `mongodb+srv://syntaxmonkey2px:${password}@cluster0.4ko9m.mongodb.net/phonebookApp?retryWrites=true&w=majority&appName=Cluster0`
 
-console.log('Connecting to:', url); // Debugging the URL
+console.log('Connecting to:', url) // Debugging the URL
 
 mongoose.set('strictQuery',false)
 
@@ -28,13 +28,13 @@ const person = new Person({
 })
 
 person.save().then(result => {
-  console.log('person saved!')
+  console.log('person saved!', result)
   mongoose.connection.close()
 })
 
 Person.find({}).then(result => {
-    result.forEach(person => {
-      console.log(person)
-    })
-    mongoose.connection.close()
+  result.forEach(person => {
+    console.log(person)
   })
+  mongoose.connection.close()
+})
